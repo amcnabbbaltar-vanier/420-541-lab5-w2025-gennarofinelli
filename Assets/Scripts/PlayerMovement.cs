@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     /// Checks if the character is currently grounded using a Raycast.
     /// If false, the character is in the air.
     /// </summary>
-    public bool IsGrounded => 
+    public bool IsFalling => 
         Physics.Raycast(transform.position + Vector3.up * 0.01f, Vector3.down, groundCheckDistance);
 
     /// <summary>
@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
     private void HandleJump()
     {
         // Apply jump force only if jump was requested and the character is grounded
-        if (jumpRequest && IsGrounded)
+        if (jumpRequest && IsFalling)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
             jumpRequest = false; // Reset jump request after applying jump
